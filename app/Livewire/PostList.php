@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -18,17 +18,9 @@ class PostList extends Component
     #[Url]
     public $tag = '';
 
-    public function render(): View
+    public function render(PostService $postService): View
     {
-        $posts = Post::with('tags');
-
-        if ($this->tag) {
-            $posts->whereHas('tags', function ($q) {
-                $q->where('name', $this->tag);
-            });
-        }
-
-        $posts = $posts->paginate(self::POSTS_PER_PAGE);
+        $posts = $postService->getPosts($this->tag, self::POSTS_PER_PAGE);
 
         return view('livewire.post-list', [
             'posts' => $posts,
