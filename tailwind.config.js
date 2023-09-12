@@ -1,4 +1,3 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 
@@ -11,11 +10,31 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    screens: {
+        sm: '576px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+    },
+
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
+            typography: (theme) => ({
+                DEFAULT: {
+                    css: {
+                        blockquote: {
+                            fontWeight: 'normal',
+                            color: theme('colors.slate.600'),
+                        },
+                        'blockquote p:first-of-type::before': {
+                            content: '',
+                        },
+                        'blockquote p:last-of-type::after': {
+                            content: '',
+                        },
+                    },
+                },
+            }),
         },
     },
 
