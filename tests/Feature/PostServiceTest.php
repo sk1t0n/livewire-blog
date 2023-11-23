@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Repositories\PostRepository;
 use App\Services\PostService;
 
 use function Pest\Laravel\assertDatabaseCount;
@@ -32,7 +33,8 @@ test('getPosts', function () {
     ]);
     assertDatabaseCount('posts', 2);
 
-    $postService = new PostService();
+    $postRepository = new PostRepository();
+    $postService = new PostService($postRepository);
     $result = $postService->getPosts($tag1->name, 6);
     assertSame(1, $result->total());
     $result = $postService->getPosts('invalid', 6);

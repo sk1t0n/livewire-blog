@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', PostList::class)->name('home');
-Route::get('/posts/{post}', PostDetail::class)->name('posts.detail');
+Route::get('/posts/{id}', PostDetail::class)
+    ->whereNumber('id')
+    ->name('posts.detail');
 
 Route::middleware([
     'auth:sanctum',
