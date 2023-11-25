@@ -18,9 +18,9 @@ class PostList extends Component
     #[Url]
     public $tag = '';
 
-    public function render(PostService $postService): View
+    public function render(PostService $service): View
     {
-        $posts = $postService->getPosts($this->tag, self::POSTS_PER_PAGE);
+        $posts = $service->getPosts($this->tag, self::POSTS_PER_PAGE);
 
         return view('livewire.post-list', [
             'posts' => $posts,

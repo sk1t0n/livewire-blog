@@ -4,21 +4,27 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Repositories\PostRepository;
+use App\Models\Post;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PostService
 {
-    public function __construct(private PostRepository $postRepository)
-    {
-    }
-
     public function getPosts(
         string $tag,
         int $postsPerPage
     ): LengthAwarePaginator {
-        $query = $this->postRepository->findAllPostsByTagName($tag);
+        return Post::withTag($tag)->paginate($postsPerPage);
+    }
 
-        return $query->paginate($postsPerPage);
+    public function getPostById(int $id): Post
+    {
+        return Post::select([
+            'id',
+            'title',
+            'content',
+            'image',
+            'category_id',
+            'created_at',
+        ])->findOrFail($id);
     }
 }

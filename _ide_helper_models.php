@@ -57,6 +57,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post withTag(string $tag = '')
  */
 	class Post extends \Eloquent {}
 }

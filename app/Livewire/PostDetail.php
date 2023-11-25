@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Post;
-use App\Repositories\PostRepository;
+use App\Services\PostService;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -11,9 +11,9 @@ class PostDetail extends Component
 {
     public Post $post;
 
-    public function mount(PostRepository $postRepository, int $id): void
+    public function mount(PostService $service, int $id): void
     {
-        $this->post = $postRepository->findById($id);
+        $this->post = $service->getPostById($id);
     }
 
     public function render(): View
