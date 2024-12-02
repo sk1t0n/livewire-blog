@@ -11,3 +11,7 @@ CHANGELOG.md export-ignore
 .styleci.yml export-ignore
 _ide_helper.php linguist-generated
 _ide_helper_models.php linguist-generated
+package-lock.json linguist-generated
+composer.lock linguist-generated
+artisan linguist-generated
+lang/vendor/** linguist-vendored
